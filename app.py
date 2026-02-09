@@ -2,21 +2,31 @@ from flask import Flask, render_template, request, redirect, session
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
-
+import os
+import json
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
+
 # ================= GOOGLE SHEETS CONNECTION =================
 
-scope = [
-    "https://spreadsheets.google.com/feeds",
-    "https://www.googleapis.com/auth/drive"
-]
+# scope = [
+#     "https://spreadsheets.google.com/feeds",
+#     "https://www.googleapis.com/auth/drive"
+# ]
 
-# creds = ServiceAccountCredentials.from_json_keyfile_name(
-#     "credentials.json", scope
-# )
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+# # creds = ServiceAccountCredentials.from_json_keyfile_name(
+# #     "credentials.json", scope
+# # )
+# creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 
+# Load credentials from environment variable
+credentials_json = os.getenv("GOOGLE_CREDENTIALS")
+if not credentials_json:
+    raise ValueError("GOOGLE_CREDENTIALS environment variable not set")
+
+credentials_dict = json.loads(credentials_json)
+scope = ['https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
 client = gspread.authorize(creds)
 # daily_sheet = client.open_by_key("1yFw0FeX48fpOHYAH3ozjb3Dnn8z-ME1ZSXXvJkGo3J8").worksheet("dailygoals")
 daily_sheet = client.open_by_key("1yFw0FeX48fpOHYAH3ozjb3Dnn8z-ME1ZSXXvJkGo3J8").worksheet("DailyGoals")
