@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f9fafb;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+font-family:system-ui;
+}
+
+.signup-card{
+background:white;
+padding:35px;
+border-radius:18px;
+width:380px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.logo{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin-bottom:20px;
+}
+
+.logo-icon{
+background:#3f8f72;
+color:white;
+width:42px;
+height:42px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+}
+
+.tabs{
+background:#f1f5f4;
+border-radius:12px;
+padding:5px;
+display:flex;
+margin-bottom:20px;
+}
+
+.tabs div{
+flex:1;
+text-align:center;
+padding:8px;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+}
+
+.tabs .active{
+background:white;
+box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+
+input,select{
+border-radius:10px!important;
+padding:10px!important;
+}
+
+.create-btn{
+background:linear-gradient(to right,#3f8f72,#4fa28b);
+border:none;
+color:white;
+padding:10px;
+border-radius:12px;
+width:100%;
+font-weight:600;
+}
+
+.small-text{
+color:#6b7280;
+font-size:14px;
+text-align:center;
+margin-bottom:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="signup-card">
+
+<div class="logo">
+<div class="logo-icon">◎</div>
+<div>
+<h5 class="mb-0">Goal Tracker</h5>
+<small class="text-muted">Student & Teacher Portal</small>
+</div>
+</div>
+
+<div class="tabs">
+<div onclick="location.href='/login'" style="color:#6b7280">Sign In</div>
+<div class="active">Sign Up</div>
+</div>
+
+<p class="small-text">Create your account to get started</p>
+
+<form method="POST" action="/signup">
+
+<label>Full Name</label>
+<input class="form-control mb-3" name="username" placeholder="John Doe" required>
+
+<label>Email</label>
+<input class="form-control mb-3" name="email" placeholder="you@example.com" required>
+
+<label>Password</label>
+<input type="password" class="form-control mb-3" name="password" placeholder="••••••••" required>
+
+<label>I am a...</label>
+<select name="role" class="form-control mb-3" required>
+<option value="">Select Role</option>
+<option value="Student">Student</option>
+<option value="Teacher">Teacher</option>
+</select>
+
+<button class="create-btn">Create Account</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

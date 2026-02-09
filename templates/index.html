@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Goal Tracker App</h1>
+
+<a href="/daily"><button>Daily Goals</button></a>
+<a href="/weekly"><button>Weekly Goals</button></a>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Goal Dashboard</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f7faf9;
+}
+
+.stat-card{
+border-radius:15px;
+padding:20px;
+background:white;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.goal-card{
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.progress{
+height:8px;
+border-radius:10px;
+}
+
+.profile-box{
+background:#198754;
+color:white;
+border-radius:15px;
+padding:20px;
+}
+.welcome{
+    color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<!-- HEADER -->
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+<h4>GoalSheet</h4>
+<small>Track your progress</small>
+</div>
+
+<a href="/logout" class="btn btn-danger">Logout</a>
+
+</div>
+
+<!-- PROFILE -->
+
+<div class="profile-box mb-4">
+
+<h5 class="welcome">Welcome {{username}} 👋</h5>
+<p class="mb-0">Student Goal Tracker Dashboard</p>
+
+<div class="mt-2">
+
+<a href="/profile" class="btn btn-light btn-sm">Profile</a>
+<button class="btn btn-secondary shadow rounded-pill px-4"
+data-bs-toggle="modal"
+data-bs-target="#dailyModal">
+➕ Add Daily Goal
+</button>
+
+<button class="btn btn-primary shadow rounded-pill px-4"
+data-bs-toggle="modal"
+data-bs-target="#weeklyModal">
+➕ Add Weekly Goal
+</button>
+
+{% include 'daily.html' %}
+{% include 'weekly.html' %}
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="row g-3 mb-4">
+
+<div class="col-md-3 col-6">
+<div class="stat-card text-center">
+<h4>{{total_daily}}</h4>
+<p>Daily Goals</p>
+
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-card text-center">
+<h4>{{completed}}</h4>
+<p>Completed</p>
+
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-card text-center">
+<h4>{{in_progress}}</h4>
+<p>In Progress</p>
+
+</div>
+</div>
+
+<div class="col-md-3 col-6">
+<div class="stat-card text-center">
+<h4>{{weekly_rate}}%</h4>
+<p>Weekly Rate</p>
+
+</div>
+</div>
+
+</div>
+
+<!-- GOALS -->
+
+<div class="row">
+
+<!-- LEFT -->
+
+<div class="col-md-6">
+
+<div class="goal-card">
+
+<h5>Daily Goals</h5>
+
+<ul class="list-group mt-3">
+
+{% for goal in daily_goals %}
+<li class="list-group-item">{{goal}}</li>
+{% endfor %}
+
+</ul>
+
+<a href="/view_daily" class="btn btn-sm btn-info mt-3">View All Daily Goals</a>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="col-md-6">
+
+<div class="goal-card">
+
+<h5>Weekly Goals</h5>
+
+<ul class="list-group mt-3">
+
+{% for goal in weekly_goals %}
+<li class="list-group-item">{{goal}}</li>
+{% endfor %}
+
+</ul>
+
+<a href="/view_weekly" class="btn btn-sm btn-secondary mt-3">View All Weekly Goals</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
