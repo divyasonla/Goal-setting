@@ -2,6 +2,10 @@ from flask import Flask, render_template, request, redirect, session
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
 import json
 app = Flask(__name__)
