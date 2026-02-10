@@ -13,23 +13,31 @@ app.secret_key = "your_secret_key"
 
 # ================= GOOGLE SHEETS CONNECTION =================
 
-# scope = [
-#     "https://spreadsheets.google.com/feeds",
-#     "https://www.googleapis.com/auth/drive"
-# ]
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
 
 # # creds = ServiceAccountCredentials.from_json_keyfile_name(
 # #     "credentials.json", scope
 # # )
 # creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 
-# Load credentials from environment variable
-credentials_json = os.getenv("GOOGLE_CREDENTIALS")
-if not credentials_json:
-    raise ValueError("GOOGLE_CREDENTIALS environment variable not set")
+# Load credentials from individual environment variables
+credentials_dict = {
+    "type": os.getenv("GOOGLE_CREDENTIALS_TYPE"),
+    "project_id": os.getenv("GOOGLE_CREDENTIALS_PROJECT_ID"),
+    "private_key_id": os.getenv("GOOGLE_CREDENTIALS_PRIVATE_KEY_ID"),
+    "private_key": os.getenv("GOOGLE_CREDENTIALS_PRIVATE_KEY"),
+    "client_email": os.getenv("GOOGLE_CREDENTIALS_CLIENT_EMAIL"),
+    "client_id": os.getenv("GOOGLE_CREDENTIALS_CLIENT_ID"),
+    "auth_uri": os.getenv("GOOGLE_CREDENTIALS_AUTH_URI"),
+    "token_uri": os.getenv("GOOGLE_CREDENTIALS_TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("GOOGLE_CREDENTIALS_AUTH_PROVIDER_CERT_URL"),
+    "client_x509_cert_url": os.getenv("GOOGLE_CREDENTIALS_CLIENT_CERT_URL")
+}
 
-credentials_dict = json.loads(credentials_json)
-scope = ['https://www.googleapis.com/auth/drive']
+# scope = ['https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
 client = gspread.authorize(creds)
 # daily_sheet = client.open_by_key("1yFw0FeX48fpOHYAH3ozjb3Dnn8z-ME1ZSXXvJkGo3J8").worksheet("dailygoals")
